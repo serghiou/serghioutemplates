@@ -22,4 +22,4 @@ library(serghiouTemplates)
 
 ## Customize
 
-If you fork this repo, you can change the original template however you please and create your own template with your own preferences. Ideally, this would be part of the package, but at the moment there is no bandwidth to work on this.
+If you fork this repo (top right-hand corner), you can change the original template however you please to create your own template with your own preferences. Ideally, this would be part of the package, but at the moment there is no bandwidth to work on this.
