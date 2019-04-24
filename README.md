@@ -20,6 +20,6 @@ library(devtools); install_github(serghiou/serghiouTemplates)
 library(serghiouTemplates)
 ```
 
-## Create your own
+## Customize
 
 If you fork this repo, you can change the original template however you please and create your own template with your own preferences. Ideally, this would be part of the package, but at the moment there is no bandwidth to work on this.
