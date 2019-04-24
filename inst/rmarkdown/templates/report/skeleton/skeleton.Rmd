@@ -68,9 +68,10 @@ library(ggplot2)
 library(magrittr)
 
 
+
 #########
 
-# knitr
+### knitr
 
 # Define chunk options
 opts_chunk$set(echo = TRUE
@@ -109,29 +110,39 @@ knit_hooks$set(output = function(x, options) {
 # and his github page: https://github.com/yihui/knitr-examples
 
 
+
 #########
 
-# kableExtra
+### kableExtra
+
 options(knitr.kable.NA = ''  # replace NAs in tables with blank
         , digits = 3)          # round digits (doesn't work without this here!)
 
-### Example use
+## Example use
 # data.frame(x = c(1,2,3), y = c(4,5,6), z = c(7,8,9)) %>% 
 #   kable(booktabs = T) %>% kable_styling()
 
-### Guidelines
+# Function to simplify table styling
+pretty_table <- function(tab, escape = T, full_width = F) {
+  tab %>% 
+  kable(escape = escape) %>%
+  kable_styling("striped", position = "center", full_width = full_width)
+}
+
+## Guidelines
 # No longer need to define options(knitr.table.format = "html"). It is now automatically done as soon as you load kableExtra
 # No need to run kable() every time - done automatically as soon as you load kableExtra
 # Loading kableExtra nullifies any styling applied by df_table: kable in the preamble - if you are content with standard formatting, DO NOT load kableExtra
 
 
+
 #########
 
-# ggplot2
+### ggplot2
 
 # Set up preferred theme in ggplot2
 my_theme <- 
-  # this and theme_minimal() are the best
+  # this and theme_minimal() are my favorite
   theme_light() +  
   theme(plot.title   = element_text(face = "bold"),
         legend.title = element_text(face = "bold"),
@@ -142,15 +153,16 @@ my_theme <-
         axis.title.y = element_text(colour = "grey25"),
         axis.title.x = element_text(colour = "grey25"))
 
-# Make my theme the default theme
+# Make the above theme the default theme
 original_theme <- theme_set(my_theme)
 
 # Use ggsave to save plots after plotting - this reduces size dramatically
 
 
+
 #########
 
-# Tabbed sections
+### Tabbed sections
 
 # You can organize content using tabs by applying the .tabset class attribute to headers within a document. This will cause all sub-headers of the header with the .tabset attribute to appear within tabs rather than as standalone sections. For example:
 
@@ -159,9 +171,10 @@ original_theme <- theme_set(my_theme)
 ### By Product
 
 
+
 #########
 
-# Update package
+### Update package
 
 # To update the package use:
 # Replace ~/serghiouTemplates/inst/rmarkdown/templates/report/skeleton.rmd
@@ -173,6 +186,7 @@ original_theme <- theme_set(my_theme)
 ```{r setup}
 # Load packages
 library(tidyverse)
+library(tidymodels)
 library(magrittr)
 library(readxl)
 
