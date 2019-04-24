@@ -12,6 +12,13 @@ Please reference the repository if you happen to use it :)
 library(devtools); install_github(serghiou/serghiouTemplates)
 ```
 
+This is not a fully  blown package yet, so you'll have to manually install some basic dependencies using the code below.
+
+```{r}
+packages <- c("prettydoc", "tufte", "rmdformats", "epuRate"); install.packages(packages)
+```
+
+
 ## Use
 
 ```{r}
