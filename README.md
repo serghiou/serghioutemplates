@@ -7,3 +7,15 @@ An R Markdown template that combines all templates I use and all of my pre-defin
 Please reference the repository if you happen to use it :)
 
 </div>
+
+## Install
+
+```{r}
+library(devtools); install_github(serghiou/serghiouTemplates)
+```
+
+## Use
+
+```{r}
+library(serghiouTemplates)
+```
