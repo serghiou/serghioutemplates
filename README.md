@@ -6,8 +6,6 @@ An R Markdown template that combines all templates I use and all of my pre-defin
 
 Please reference the repository if you happen to use it :)
 
-</div>
-
 ## Install
 
 ```{r}
@@ -23,3 +21,6 @@ library(serghiouTemplates)
 ## Customize
 
 If you fork this repo (top right-hand corner), you can change the original template however you please to create your own template with your own preferences. Ideally, this would be part of the package, but at the moment there is no bandwidth to work on this.
+
+
+</div>
