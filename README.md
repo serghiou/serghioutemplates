@@ -32,7 +32,7 @@ If you fork this repo (top right-hand corner), you can change the original templ
 
 ## Other
 
-You may enjoy a list of my favorite resources and packages for R [here](serghiou/best-of-r) (feel free to recommend packages that you do not see, but you strongly feel that you should).
+You may enjoy a list of my favorite resources and packages for R [here](serghiou/best-of-r) (feel free to recommend packages that you do not see, but you strongly feel that you should!).
 
 
 ## Acknowledgements
