@@ -30,4 +30,13 @@ library(serghiouTemplates)
 If you fork this repo (top right-hand corner), you can change the original template however you please to create your own template with your own preferences. Ideally, this would be part of the package, but at the moment there is no bandwidth to work on this.
 
 
+## Other
+
+You may enjoy a list of my favorite resources and packages for R [here](serghiou/best-of-r).
+
+
+## Acknowledgements
+
+This package would have not been possible without the great work of the community that went through the effort of creating the packages on which this meta-template depends and their dedication to open source.
+
 </div>
