@@ -6,7 +6,9 @@ output:
   prettydoc::html_pretty:
     theme: hpstr      # or: architect; https://github.com/yixuan/prettydoc
     highlight: github # or: vignette
+    toc: TRUE         # no toc_float available
     df_print: kable   # obviates %>% kable; does not replace styling though
+    # no cold_folding available
   tufte::tufte_handout: default
   pdf_document:
     highlight: tango
@@ -69,13 +71,11 @@ library(magrittr)
 
 
 
-#########
-
-### knitr
+######### knitr
 
 # Define chunk options
 opts_chunk$set(echo = TRUE
-               , cache     = TRUE       # thus no need to re-run chunks
+               , cache     = FALSE      # if TRUE, no need to rerun chunks
                #, cache.lazy = TRUE     # use when have big objects (>1 GB)
                , cache.comments = FALSE # do not rebuild if comments change
                , tidy      = FALSE      # can play with this
@@ -111,9 +111,7 @@ knit_hooks$set(output = function(x, options) {
 
 
 
-#########
-
-### kableExtra
+######### kableExtra
 
 options(knitr.kable.NA = ''  # replace NAs in tables with blank
         , digits = 3)          # round digits (doesn't work without this here!)
@@ -123,10 +121,17 @@ options(knitr.kable.NA = ''  # replace NAs in tables with blank
 #   kable(booktabs = T) %>% kable_styling()
 
 # Function to simplify table styling
-pretty_table <- function(tab, escape = T, full_width = F) {
-  tab %>% 
-  kable(escape = escape) %>%
-  kable_styling("striped", position = "center", full_width = full_width)
+sable <- function(tab, escape = T, full_width = F, drop = F) {
+  if (drop) {
+    tab %>%
+      kable(escape = escape, booktabs = T) %>%
+      collapse_rows(valign = "top") %>% 
+      kable_styling("striped", position = "center", full_width = full_width)
+  } else {
+    tab %>%
+      kable(escape = escape, booktabs = T) %>%
+      kable_styling("striped", position = "center", full_width = full_width)
+  }
 }
 
 ## Guidelines
@@ -136,9 +141,7 @@ pretty_table <- function(tab, escape = T, full_width = F) {
 
 
 
-#########
-
-### ggplot2
+#########  ggplot2
 
 # Set up preferred theme in ggplot2
 my_theme <- 
@@ -160,9 +163,7 @@ original_theme <- theme_set(my_theme)
 
 
 
-#########
-
-### Tabbed sections
+######### Tabbed sections
 
 # You can organize content using tabs by applying the .tabset class attribute to headers within a document. This will cause all sub-headers of the header with the .tabset attribute to appear within tabs rather than as standalone sections. For example:
 
@@ -172,9 +173,7 @@ original_theme <- theme_set(my_theme)
 
 
 
-#########
-
-### Update package
+######### Update package
 
 # To update the package use:
 # Replace ~/serghiouTemplates/inst/rmarkdown/templates/report/skeleton.rmd
