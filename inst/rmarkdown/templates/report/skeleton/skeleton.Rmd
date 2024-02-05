@@ -187,7 +187,7 @@ my_theme <-
 # Make the above theme the default theme
 original_theme <- theme_set(my_theme)
 
-# Use ggsave to save plots after plotting - this reduces size dramatically
+# Use ggplot2::ggsave to save plots after plotting - this reduces size dramatically
 
 
 ######### Tabbed sections
@@ -202,8 +202,7 @@ original_theme <- theme_set(my_theme)
 ######### Update package
 
 # To update the package use:
-# Replace ~/serghiouTemplates/inst/rmarkdown/templates/report/skeleton.rmd
-# library(devtools); setwd("/Users/Stelios/"); install("serghiouTemplates")
+# devtools::install_github(serghiou/serghioutemplates)
 ```
 
 # Setup {.tabset}
