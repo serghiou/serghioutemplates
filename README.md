@@ -9,7 +9,7 @@ Please reference the repository if you happen to use it :)
 ## Install
 
 ```r
-devtools:install_github(serghiou/serghioutemplates)
+devtools::install_github(serghiou/serghioutemplates)
 ```
 
 This is not a fully  blown package yet, so you'll have to manually install some basic dependencies using the code below.
