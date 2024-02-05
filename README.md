@@ -1,4 +1,4 @@
-# serghiouTemplates
+# serghioutemplates
 
 <div align="justify">
  
@@ -9,7 +9,7 @@ Please reference the repository if you happen to use it :)
 ## Install
 
 ```{r}
-library(devtools); install_github(serghiou/serghiouTemplates)
+library(devtools); install_github(serghiou/serghioutemplates)
 ```
 
 This is not a fully  blown package yet, so you'll have to manually install some basic dependencies using the code below.
@@ -22,7 +22,7 @@ packages <- c("prettydoc", "tufte", "rmdformats", "epuRate"); install.packages(p
 ## Use
 
 ```{r}
-library(serghiouTemplates)
+library(serghioutemplates)
 ```
 
 ## Customize
