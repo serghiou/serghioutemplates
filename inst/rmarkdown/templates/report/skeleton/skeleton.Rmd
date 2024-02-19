@@ -2,6 +2,8 @@
 title: 'Paper from code'
 author: "Stylianos Serghiou"
 date: '`r format(Sys.time(), "%d/%m/%Y")`'
+params:
+  PROPORTION_OF_DATA: 0.5
 output:
   prettydoc::html_pretty:
     # no cold_folding available
@@ -44,8 +46,8 @@ header-includes:
 - \DeclareUnicodeCharacter{2583}{~}
 - \DeclareUnicodeCharacter{2585}{~}
 - \DeclareUnicodeCharacter{2586}{~}
-- \DeclareUnicodeCharacter{2587}{~} 
-- \DeclareUnicodeCharacter{FB00}{~} 
+- \DeclareUnicodeCharacter{2587}{~}
+- \DeclareUnicodeCharacter{FB00}{~}
 - \usepackage{graphicx}
 editor_options: 
   chunk_output_type: console
@@ -79,7 +81,7 @@ opts_chunk$set(
   # cache.lazy = TRUE,  # use with big objects (>1 GB)
   cache.comments = F,  # do not rebuild if comments change
   tidy = F,  # can play with this
-  warning = F, 
+  warning = F,
   message = F,
   comment = NA,
   fig.align = "center",
@@ -98,8 +100,8 @@ knit_hooks$set(output = function(x, options) {
   if (!is.null(n <- options$linewidth)) {
     x = knitr:::split_lines(x)
     
-    # wrap lines wider than 'n' 
-    if (any(nchar(x) > n)) 
+    # wrap lines wider than 'n'
+    if (any(nchar(x) > n))
       x <- strwrap(x, width = n)
       x <- paste(x, collapse = "\n")
   }
@@ -236,6 +238,9 @@ ANALYSIS_NAME <- "data-analysis"
 
 # Should the Dockerfile be automatically updated?
 UPDATE_DOCKERFILE <- FALSE
+
+# Set the seed
+set.seed(1891)
 ```
 
 
@@ -280,7 +285,9 @@ Data analysis utils.
 # Read
 
 ```{r}
-dat_ <- read_csv("")
+df_ <-
+  read_csv("") %>%
+  dplyr::sample_frac(params$PROPORTION_OF_DATA)
 ```
 
 
@@ -291,7 +298,7 @@ dat_ <- read_csv("")
 ## Dataset1
 
 ```{r}
-dat <- dat_
+df <- df_
 ```
 
 
@@ -370,7 +377,6 @@ Write all figures.
 ```
 
 
-
 ## Tables
 
 Write all tables.
@@ -432,7 +438,7 @@ styler::style_file(
 ```
 
 
-## Dependencies
+## Dependency management
 
 ```{r}
 # Clean up project of libraries not in use
