@@ -2,9 +2,13 @@
 
 <div align="justify">
  
-An R Markdown template that combines all templates I use and all of my pre-defined code to avoid retyping a banch of code all the time. Excited to hear about any ideas/feedback about what could be done better! 
+An R Markdown template that combines all templates I use and all of my pre-defined code to avoid copy-pasting. Excited to hear any ideas/feedback about what could be done better! 
 
 Please reference the repository if you happen to use it :)
+
+## Quarto
+
+Even though I currently prefer quarto files, the templates functionality is still not available in RStudio (even though this is possible). As such, for the time being, this package still generates RMarkdown files. Simply take the RMarkdown file and save it as a .qmd to get a Quarto file.
 
 ## Install
 
