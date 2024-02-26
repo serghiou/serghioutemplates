@@ -442,7 +442,9 @@ styler::style_file(
 
 ```{r}
 # Clean up project of libraries not in use
-renv::clean()
+# (use prompt = FALSE to avoid the interactive session)
+# (packages can only be removed in interactive mode b/c this is destructive)
+renv::clean(prompt = TRUE)
 
 # Update lock file with new packages
 renv::snapshot()
