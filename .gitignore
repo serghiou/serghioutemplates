@@ -1,9 +1,10 @@
-# History files
-.Rhistory
+# R files
 .Rapp.history
-
-# Session Data files
 .RData
+.Rhistory
+.Rproj.user/
+.Rprofile
+.Rbuildignore
 
 # Example code in package build process
 *-Ex.R
@@ -14,10 +15,7 @@
 # Output files from R CMD check
 /*.Rcheck/
 
-# RStudio files
-.Rproj.user/
-
-# produced vignettes
+# Vignettes
 vignettes/*.html
 vignettes/*.pdf
 
