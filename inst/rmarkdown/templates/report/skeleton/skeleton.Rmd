@@ -64,6 +64,8 @@ padding: 0 0 0.5em 0
 </style>
 
 ```{r knitr, echo=FALSE}
+# nolint start
+
 # Load packages
 library(knitr)
 library(rmdformats)
@@ -76,34 +78,34 @@ library(magrittr)
 
 # Define chunk options
 opts_chunk$set(
-  echo = T,
-  cache = F,  # if TRUE, no need to rerun chunks
+  echo = TRUE,
+  cache = FALSE, # if TRUE, no need to rerun chunks
   # cache.lazy = TRUE,  # use with big objects (>1 GB)
-  cache.comments = F,  # do not rebuild if comments change
-  tidy = F,  # can play with this
-  warning = F,
-  message = F,
+  cache.comments = FALSE, # do not rebuild if comments change
+  tidy = FALSE, # can play with this
+  warning = FALSE,
+  message = FALSE,
   comment = NA,
   fig.align = "center",
   fig.width = 7,
-  fig.path = "Figs/",  # export all figures to dir Figs
+  fig.path = "Figs/", # export all figures to dir Figs
   linewidth = 91,
   width = 75
 )
 
-# Initiatialize hook
-hook_output = knit_hooks$get("output")
+# Initialize hook
+hook_output <- knit_hooks$get("output")
 
 # Hook to wrap output text when it exceeds 'n' using linewidth
 knit_hooks$set(output = function(x, options) {
-  
   if (!is.null(n <- options$linewidth)) {
-    x = knitr:::split_lines(x)
-    
+    x <- knitr:::split_lines(x)
+
     # wrap lines wider than 'n'
-    if (any(nchar(x) > n))
+    if (any(nchar(x) > n)) {
       x <- strwrap(x, width = n)
-      x <- paste(x, collapse = "\n")
+    }
+    x <- paste(x, collapse = "\n")
   }
   hook_output(x, options)
 })
@@ -111,18 +113,18 @@ knit_hooks$set(output = function(x, options) {
 # Times a chunk and prints the time it took to run it under the chunk
 # To time a chunk, include in the chunk options: {r my_chunk, timeit=TRUE}
 knitr::knit_hooks$set(timeit = local({
-  now = NULL
+  now <- NULL
   function(before, options) {
     if (before) {
       now <<- Sys.time()
     } else {
-      res = difftime(Sys.time(), now)
+      res <- difftime(Sys.time(), now)
       now <<- NULL
       # use options$label if you want the chunk label as well
-      paste('Time for this code chunk:', as.character(res))
+      paste("Time for this code chunk:", as.character(res))
     }
-  }})
-)
+  }
+}))
 
 # For more knitr options visit: https://yihui.name/knitr/options/
 # and his github page: https://github.com/yihui/knitr-examples
@@ -131,32 +133,33 @@ knitr::knit_hooks$set(timeit = local({
 ######### kableExtra
 
 options(
-  knitr.kable.NA = '',  # replace NAs in tables with blank
-  digits = 3  # round digits (doesn't work without this here!)
+  knitr.kable.NA = "", # replace NAs in tables with blank
+  digits = 3 # round digits (doesn't work without this here!)
 )
 
 ## Example use
-# data.frame(x = c(1,2,3), y = c(4,5,6), z = c(7,8,9)) %>% 
+# data.frame(x = c(1,2,3), y = c(4,5,6), z = c(7,8,9)) %>%
 #   kable(booktabs = T) %>% kable_styling()
 
 # Function to simplify table styling
-sable <- function(tab, escape = T, full_width = F, drop = F, font_size = 12) {
+sable <- function(tab, escape = TRUE, full_width = FALSE, drop = FALSE,
+                  font_size = 12) {
   if (drop) {
     tab %>%
-      kable(escape = escape, booktabs = T) %>%
-      collapse_rows(valign = "top") %>% 
+      kable(escape = escape, booktabs = TRUE) %>%
+      collapse_rows(valign = "top") %>%
       kable_styling(
-        "striped", 
-        position = "center", 
-        full_width = full_width, 
+        "striped",
+        position = "center",
+        full_width = full_width,
         font_size = font_size
       )
   } else {
     tab %>%
-      kable(escape = escape, booktabs = T) %>%
+      kable(escape = escape, booktabs = TRUE) %>%
       kable_styling(
-        "striped", 
-        position = "center", 
+        "striped",
+        position = "center",
         full_width = full_width,
         font_size = font_size
       )
@@ -164,24 +167,28 @@ sable <- function(tab, escape = T, full_width = F, drop = F, font_size = 12) {
 }
 
 ## Guidelines
-# No longer need to define options(knitr.table.format = "html"). It is now automatically done as soon as you load kableExtra
-# No need to run kable() every time - done automatically as soon as you load kableExtra
-# Loading kableExtra nullifies any styling applied by df_table: kable in the preamble - if you are content with standard formatting, DO NOT load kableExtra
+# No longer need to define options(knitr.table.format = "html"). It is now
+# automatically done as soon as you load kableExtra.
+# No need to run kable() every time - done automatically as soon as you load
+# kableExtra.
+# Loading kableExtra nullifies any styling applied by df_table: kable in the
+# preamble - if you are content with standard formatting, DO NOT load 
+# kableExtra.
 
 
 #########  ggplot2
 
 # Set up preferred theme in ggplot2
-my_theme <- 
-  # this and theme_minimal() are my favorite
-  theme_light() +  
+# (theme_light and theme_minimal() are my favorite)
+my_theme <-
+  theme_light() +
   theme(
     axis.ticks = element_blank(),
     axis.title = element_text(face = "bold"),
     axis.title.x = element_text(margin = margin(t = 15)),
-    axis.title.y  = element_text(margin = margin(r = 7)),
-    legend.key = element_rect(colour = NA, fill = NA),  # Avoid borders
-    panel.border = element_blank(), 
+    axis.title.y = element_text(margin = margin(r = 7)),
+    legend.key = element_rect(colour = NA, fill = NA), # Avoid borders
+    panel.border = element_blank(),
     text = element_text(color = "grey20"),
     title = element_text(face = "bold")
   )
@@ -194,7 +201,10 @@ original_theme <- theme_set(my_theme)
 
 ######### Tabbed sections
 
-# You can organize content using tabs by applying the .tabset class attribute to headers within a document. This will cause all sub-headers of the header with the .tabset attribute to appear within tabs rather than as standalone sections. For example:
+# You can organize content using tabs by applying the .tabset class attribute
+# to headers within a document. This will cause all sub-headers of the header
+# with the .tabset attribute to appear within tabs rather than as standalone
+# sections. For example:
 
 ## Quarterly Results {.tabset}
 
@@ -204,7 +214,9 @@ original_theme <- theme_set(my_theme)
 ######### Update package
 
 # To update the package use:
-# devtools::install_github(serghiou/serghioutemplates)
+# renv::install("serghiou/serghioutemplates")
+
+# nolint end
 ```
 
 # Setup {.tabset}
@@ -269,14 +281,12 @@ models <- list()
 R utils.
 
 ```{r}
-
 ```
 
 
 Data analysis utils.
 
 ```{r}
-
 ```
 
 
@@ -307,7 +317,6 @@ df <- df_
 # Compute
 
 ```{r}
-
 ```
 
 
@@ -368,10 +377,10 @@ Write all figures.
 #   width = 10,
 #   height = 15
 # )
-# 
+#
 # # Plot
 # plots$forest_plot_frequentist
-# 
+#
 # # Shut down device
 # dev.off()
 ```
@@ -386,18 +395,18 @@ Write all tables.
 # df <- tables$desc_stats_cohorts_cv_prolaio
 # filepath_csv <- file.path(csv_folder, "desc-stats_by-cohort_cov.csv")
 # filepath_html <- file.path(html_folder, "desc-stats_by-cohort_cov.html")
-# 
+#
 # # Save as CSV
 # write_csv(
 #   x = df,
 #   file = filepath_csv
 # )
-# 
-# # Save as HTML 
+#
+# # Save as HTML
 # # - Save pdf does not work with webshot
 # # - It works with pagedown but not as pretty as desired
 # df %>%
-#   sable() %>% 
+#   sable() %>%
 #   kableExtra::save_kable(file = filepath_html)
 ```
 
@@ -411,7 +420,7 @@ Write all data.
 # df <- study
 # filename <- paste0(ANALYSIS_NAME, "_", today, ".csv")
 # filepath_csv <- file.path(DST_BUCKET, dst_dirname_data, filename)
-# 
+#
 # # Save as CSV
 # write_csv(
 #   x = df,
@@ -479,5 +488,9 @@ print(sessionInfo(), locale = FALSE)
 ## References
 
 ```{r refs, echo=FALSE}
-(.packages()) %>% sort %>% lapply(citation) %>% lapply(c) %>% unique
+(.packages()) %>%
+  sort() %>%
+  lapply(citation) %>%
+  lapply(c) %>%
+  unique()
 ```
