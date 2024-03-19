@@ -269,7 +269,7 @@ CONTINUOUS_VARIABLES <- c(
 Create lists.
 
 ```{r}
-plots <- list()
+figures <- list()
 tables <- list()
 models <- list()
 ```
@@ -295,7 +295,7 @@ Data analysis utils.
 
 ```{r}
 df_ <-
-  read_csv("") %>%
+  read_csv(file.path(src_dirname, src_basename)) %>%
   dplyr::sample_frac(params$PROPORTION_OF_DATA)
 ```
 
@@ -363,7 +363,7 @@ Write all figures.
 # Save
 # ggsave(
 #   file.path(pdf_folder, "histogram_num_days.pdf"),
-#   plot = plots$histogram_num_days,
+#   plot = figures$histogram_num_days,
 #   width = 6,
 #   height = 6
 # )
@@ -378,7 +378,7 @@ Write all figures.
 # )
 #
 # # Plot
-# plots$forest_plot_frequentist
+# figures$forest_plot_frequentist
 #
 # # Shut down device
 # dev.off()
@@ -466,11 +466,13 @@ renv::snapshot()
 if (UPDATE_DOCKERFILE) {
   # Create a dockerfile from the session info
   my_dockerfile <- containerit::dockerfile(from = sessionInfo(), env = ls())
+  
   # Write file
   write(my_dockerfile, file = "~/Dockerfile")
+  
+  # Print
+  print(my_dockerfile)
 }
-
-print(my_dockerfile)
 ```
 
 
